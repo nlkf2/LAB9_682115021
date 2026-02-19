@@ -1,0 +1,42 @@
+<h1>Book List</h1>
+
+<form action="/books" method="POST">
+  <input name="bookName" placeholder="New book" required />
+  <button>Add</button>
+</form>
+
+<input id="searchBox" placeholder="Search book..." />
+<button type="button" onclick="searchBooks()">Search</button>
+<div id="search-result"></div>
+<script>
+async function searchBooks() {
+  const q = document.getElementById("searchBox").value;
+
+  const res = await fetch(`/books/search?q=${encodeURIComponent(q)}`);
+  const books = await res.json();
+
+  const el = document.getElementById("search-result");
+
+  if (books.length === 0) {
+    el.innerHTML = "<p>No result</p>";
+    return;
+  }
+
+  el.innerHTML = books.map(b =>
+    `<div>${b.bookNo}. ${b.bookName}</div>`
+  ).join("");
+}
+</script>
+
+<ul>
+  <% books.forEach(b => { %>
+    <li>
+      <%= b.bookName %>
+      <form action="/books/delete/<%= b.bookNo %>" method="POST" style="display:inline">
+        <button>Delete</button>
+      </form>
+    </li>
+  <% }) %>
+</ul>
+
+<a href="/">Back</a>

@@ -1,13 +1,14 @@
 {
   "name": "lab09-bookstore-ts-json",
   "version": "1.0.0",
-  "main": "dist/server.js",
+  "main": "dist/index.js",
   "scripts": {
-  "dev": "nodemon --exec ts-node src/server.ts",
+    "dev": "nodemon --exec ts-node src/index.ts",
     "build": "tsc",
-    "start": "node dist/server.js"
+    "start": "node dist/index.js"
   },
   "dependencies": {
+    "ejs": "^4.0.1",
     "express": "^4.22.1"
   },
   "devDependencies": {
